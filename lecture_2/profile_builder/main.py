@@ -1,4 +1,3 @@
-from datetime import datetime
 
 def generate_profile(age: int):
     if 0 <= age <= 12:
@@ -19,15 +18,14 @@ def get_user_age():
         try:
             birth_year_str = input("Enter your birth year: ")
             birth_year = int(birth_year_str)
-            current_year = datetime.now().year
             if birth_year < 1905:
                 print("Error: Birth year cannot be earlier than 1905. Please try again.")
                 continue
 
-            if birth_year > current_year:
+            if birth_year > 2025:
                 print("Error: Birth year cannot be in the future. Please try again.")
                 continue
-            current_age = current_year - birth_year
+            current_age = 2025 - birth_year
 
             return birth_year, current_age
         except ValueError:
@@ -44,10 +42,10 @@ def get_hobbies():
             hobbies.append(answer)
     return hobbies
 
-def create_user_profile(name, age, hobbies):
-    life_stage = generate_profile(age)
+def create_user_profile(name, current_age, hobbies):
+    life_stage = generate_profile(current_age)
     user_profile = {"name": name,
-                    "age": age,
+                    "age": current_age,
                     "stage": life_stage,
                     "hobbies": hobbies}
     return user_profile
@@ -71,7 +69,7 @@ def display_profile(user_profile):
 
 def main():
     user_name = get_user_name()
-    birth_year_str, current_age = get_user_age()
+    birth_year, current_age = get_user_age()
     hobbies = get_hobbies()
     user_profile = create_user_profile(user_name, current_age, hobbies)
     display_profile(user_profile)
